@@ -1,3 +1,5 @@
+import type { EntityId } from '../shared/types/domain.ts'
+
 export const APP_ROUTES = Object.freeze({
   home: '/',
   discover: '/discover',
@@ -17,10 +19,10 @@ export const APP_ROUTES = Object.freeze({
   mySongs: '/my-songs',
 })
 
-export function getPlaylistRoute(playlistId) {
+export function getPlaylistRoute(playlistId: EntityId): string {
   return `${APP_ROUTES.playlists}/${encodeURIComponent(String(playlistId))}`
 }
 
-export function getArtistRoute(artistName) {
-  return `/artists/${encodeURIComponent(String(artistName))}`
+export function getArtistRoute(artistName: string): string {
+  return `/artists/${encodeURIComponent(artistName)}`
 }
