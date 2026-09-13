@@ -58,7 +58,7 @@ Create `.env.development` for local development:
 
 ```env
 VITE_BACKEND_URL=http://localhost:3005
-VITE_SUPA_B_STOR=https://your-project-ref.supabase.co/storage/v1/object/public/spotify
+VITE_SUPA_B_STOR=https://uudncwmhipchzdmuocup.supabase.co/storage/v1/object/public/spotify
 ```
 
 | Variable | Required | Description |
