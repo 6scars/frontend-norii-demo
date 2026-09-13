@@ -1,0 +1,25 @@
+.track-table__scroll { overflow-x: auto; }
+.track-table { width: 100%; border-collapse: collapse; text-align: left; }
+.track-table th { padding: var(--space-3); border-bottom: 1px solid var(--color-line); color: var(--color-text-muted); font-size: 0.68rem; font-weight: 500; }
+.track-table td { height: 66px; padding: var(--space-2) var(--space-3); border-bottom: 1px solid rgba(255,255,255,.035); color: var(--color-text-muted); font-size: 0.78rem; }
+.track-row { transition: background-color var(--motion-fast); }
+.track-row:hover { background: rgba(255,255,255,.025); }
+.track-row--current .track-row__index, .track-row--current strong { color: var(--color-accent-text); }
+.track-row__index { width: 38px; text-align: center; }
+.track-row__identity { display: flex; min-width: 210px; align-items: center; gap: var(--space-3); padding: 0; border: 0; background: transparent; color: inherit; text-align: left; cursor: pointer; }
+.track-row__identity > span:last-child { min-width: 0; }
+.track-row__identity strong, .track-row__identity small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.track-row__identity strong { color: var(--color-text); font-size: .84rem; font-weight: 600; }
+.track-row__identity small { margin-top: 4px; color: var(--color-text-muted); font-size: .7rem; }
+.track-row__artwork { position: relative; width: 44px; height: 44px; flex: 0 0 auto; display: grid; place-items: center; overflow: hidden; border-radius: 5px; background: linear-gradient(145deg, #431b1d, #151519); }
+.track-row__artwork img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.75) brightness(.8); }
+.track-row__play { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(0,0,0,.68); color: white; opacity: 0; transition: opacity var(--motion-fast); }
+.track-row__identity:hover .track-row__play, .track-row__identity:focus-visible .track-row__play { opacity: 1; }
+.track-row__actions { width: 54px; text-align: right; }
+.track-table__empty { min-height: 190px; display: grid; place-items: center; padding: var(--space-6); border: 1px dashed var(--color-line-strong); border-radius: var(--radius-md); color: var(--color-text-muted); text-align: center; }
+
+@media (width < 768px) {
+  .track-row__album, .track-table th:nth-child(3) { display: none; }
+  .track-table th, .track-table td { padding-inline: var(--space-2); }
+  .track-row__identity { min-width: 150px; }
+}

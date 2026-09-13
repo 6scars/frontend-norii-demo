@@ -1,0 +1,126 @@
+.play-left-section {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.play-left-section .song-image-container {
+  width: 64px;
+  height: 64px;
+  flex: 0 0 64px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid var(--color-line);
+  border-radius: 7px;
+  background: var(--color-surface-raised);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.play-left-section .song-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--motion-medium) var(--ease-out), filter var(--motion-fast);
+}
+
+.play-left-section .song-image-container:hover img {
+  filter: brightness(.82);
+  transform: scale(1.035);
+}
+
+.play-left-section .title-authors {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3px;
+}
+
+.play-left-section .title,
+.play-left-section .authors {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.play-left-section .title {
+  min-height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  font-size: .84rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.play-left-section .title:hover {
+  text-decoration: underline;
+}
+
+.play-left-section .authors {
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text-muted);
+  font-size: .72rem;
+}
+
+.play-left-section__playlist {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.play-left-section__add {
+  color: var(--color-text-muted);
+}
+
+.play-left-section__add[aria-expanded="true"] {
+  border-color: rgba(239, 74, 78, .34);
+  background: rgba(126, 31, 34, .14);
+  color: var(--color-accent-bright);
+}
+
+@media (width < 768px) {
+  .play-left-section {
+    gap: 10px;
+  }
+
+  .play-left-section .song-image-container {
+    width: 52px;
+    height: 52px;
+    flex-basis: 52px;
+    border-radius: 6px;
+  }
+
+  .play-left-section .title {
+    min-height: 25px;
+    font-size: .8rem;
+  }
+
+  .play-left-section .authors {
+    min-height: 22px;
+    font-size: .68rem;
+  }
+
+  .play-left-section__playlist {
+    display: none;
+  }
+}
+
+@media (width < 560px) {
+  .play-left-section .song-image-container {
+    width: 46px;
+    height: 46px;
+    flex-basis: 46px;
+  }
+}

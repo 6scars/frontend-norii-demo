@@ -1,0 +1,9 @@
+.account-menu { position: relative; z-index: 1; width: min(420px, 100%); padding: var(--space-7); border: 1px solid var(--color-line-strong); border-radius: var(--radius-lg); background: #101013; color: var(--color-text); box-shadow: 0 32px 90px rgba(0,0,0,.7); }
+.account-menu__close { position: absolute; top: var(--space-4); right: var(--space-4); transform: rotate(45deg); }
+.account-menu__avatar { width: 64px; height: 64px; display: grid; place-items: center; border-radius: 50%; background: linear-gradient(145deg, #d7b3a6, #684740); color: #171012; font-size: 1.25rem; font-weight: 800; }
+.account-menu h2 { margin-top: var(--space-4); font-size: 1.55rem; letter-spacing: -.035em; }
+.account-menu > p { margin-top: var(--space-2); color: var(--color-text-muted); font-size: .75rem; }
+.account-menu nav { display: grid; gap: 2px; margin: var(--space-6) 0; padding: var(--space-2) 0; border-block: 1px solid var(--color-line); }
+.account-menu nav button { display: flex; align-items: center; justify-content: space-between; padding: var(--space-3); border: 0; border-radius: var(--radius-sm); background: transparent; color: var(--color-text-subtle); text-align: left; cursor: pointer; }
+.account-menu nav button:hover { background: var(--color-surface-hover); color: var(--color-text); }
+.account-menu__logout { padding: 0; border: 0; background: transparent; color: var(--color-accent-bright); font-size: .74rem; cursor: pointer; }

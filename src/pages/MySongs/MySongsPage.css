@@ -1,0 +1,30 @@
+.my-songs-page { min-height: 100%; padding: var(--space-5) var(--space-7) var(--space-8); animation: page-enter var(--motion-slow) var(--ease-out) both; }
+.my-songs-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--space-5); margin-bottom: var(--space-7); }
+.my-songs-heading > div > span, .my-songs-dialog > span { color: var(--color-accent-bright); font-size: .62rem; font-weight: 700; letter-spacing: .13em; }
+.my-songs-heading h1 { margin-top: var(--space-2); font-size: clamp(2.1rem, 4vw, 3.5rem); letter-spacing: -.05em; }
+.my-songs-heading p { margin-top: var(--space-2); color: var(--color-text-muted); font-size: .78rem; }
+.my-songs-heading > a { display: flex; align-items: center; gap: var(--space-2); flex: 0 0 auto; text-decoration: none; }
+.my-songs-message { margin-bottom: var(--space-4); padding: var(--space-3) var(--space-4); border: 1px solid var(--color-line); border-radius: var(--radius-sm); background: var(--color-surface); color: var(--color-text-subtle); font-size: .72rem; }
+.my-songs-list { display: grid; gap: var(--space-3); }
+.my-song { min-width: 0; display: grid; grid-template-columns: 74px minmax(0, 1fr) auto; align-items: center; gap: var(--space-4); padding: var(--space-3); border: 1px solid var(--color-line); border-radius: var(--radius-md); background: rgba(17,17,20,.62); }
+.my-song__art { width: 74px; height: 74px; display: grid; place-items: center; overflow: hidden; border-radius: var(--radius-sm); background: linear-gradient(145deg, #43181c, #111114); color: var(--color-accent-bright); }
+.my-song__art img { width: 100%; height: 100%; object-fit: cover; }
+.my-song__details { min-width: 0; }
+.my-song__details strong, .my-song__details p, .my-song__details small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.my-song__details strong { font-size: .88rem; }
+.my-song__details p { margin-top: var(--space-2); color: var(--color-text-subtle); font-size: .7rem; }
+.my-song__details small { margin-top: var(--space-2); color: var(--color-text-muted); font-size: .64rem; }
+.my-song__delete { color: #f1a2a4; }
+.my-songs-more { display: block; margin: var(--space-5) auto 0; }
+.my-songs-page--center { min-height: 48vh; display: grid; place-content: center; justify-items: center; text-align: center; }
+.my-songs-page--center > .ui-icon { color: var(--color-accent-bright); }
+.my-songs-page--center h1, .my-songs-page--center h2 { margin-top: var(--space-4); font-size: 1.5rem; }
+.my-songs-page--center p { max-width: 440px; margin: var(--space-3) 0 var(--space-5); color: var(--color-text-muted); line-height: 1.6; }
+.my-songs-dialog-backdrop { position: fixed; z-index: 80; inset: 0; display: grid; place-items: center; padding: var(--space-5); background: rgba(0,0,0,.74); }
+.my-songs-dialog { width: min(470px, 100%); padding: var(--space-6); border: 1px solid var(--color-line-strong); border-radius: var(--radius-lg); background: #111114; box-shadow: 0 28px 90px rgba(0,0,0,.72); }
+.my-songs-dialog h2 { margin-top: var(--space-3); font-size: 1.45rem; letter-spacing: -.03em; }
+.my-songs-dialog p { margin-top: var(--space-3); color: var(--color-text-muted); font-size: .74rem; line-height: 1.65; }
+.my-songs-dialog > div { display: flex; justify-content: flex-end; gap: var(--space-3); margin-top: var(--space-6); }
+@media (width < 768px) { .my-songs-page { padding: var(--space-4); } .my-songs-heading { align-items: flex-start; flex-direction: column; } }
+@media (width < 560px) { .my-song { grid-template-columns: 58px minmax(0, 1fr); } .my-song__art { width: 58px; height: 58px; } .my-song__delete { grid-column: 1 / -1; width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .my-songs-page { animation: none; } }

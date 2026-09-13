@@ -1,0 +1,142 @@
+.app-shell {
+  height: 100dvh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr) 0px;
+  grid-template-rows: var(--height-of-header) minmax(0, 1fr);
+  transition: grid-template-columns var(--description-motion) var(--ease-out);
+  --queue-player-offset: 0px;
+  background: var(--color-canvas);
+  color: var(--color-text);
+  overflow: hidden;
+}
+
+.app-shell--playing {
+  --queue-player-offset: var(--player-height);
+  padding-bottom: var(--player-height);
+}
+
+.app-shell__sidebar,
+.app-shell__header,
+.app-shell__workspace {
+  min-width: 0;
+  min-height: 0;
+}
+
+.app-shell__sidebar {
+  grid-column: 1;
+  grid-row: 2;
+  border-right: 1px solid var(--color-line);
+}
+
+.app-shell__header {
+  position: relative;
+  z-index: calc(var(--queue-layer) + 1);
+  grid-column: 1 / -1;
+  grid-row: 1;
+  container: workspace / inline-size;
+}
+
+.app-shell__workspace {
+  grid-column: 2;
+  grid-row: 2;
+  container: workspace / inline-size;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  overflow: hidden;
+}
+
+.app-shell > .description-drawer {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.app-shell--immersive {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  padding-bottom: 0;
+}
+
+.app-shell--immersive .app-shell__sidebar,
+.app-shell--immersive .app-shell__header,
+.app-shell--immersive > .play,
+.app-shell--immersive > .description-drawer {
+  display: none;
+}
+
+.app-shell--details-open {
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr) min(var(--description-width), 38vw);
+}
+
+.app-shell--immersive .app-shell__workspace {
+  grid-column: 1;
+  grid-row: 1;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.app-shell--immersive .Center .center-primary {
+  width: 100%;
+  flex-basis: 100%;
+}
+
+@media (width < 1280px) {
+  .app-shell:not(.app-shell--immersive) {
+    grid-template-columns:
+      var(--sidebar-width-compact)
+      minmax(0, 1fr)
+      0;
+  }
+
+  .app-shell__sidebar {
+    position: relative;
+    grid-column: 1;
+    grid-row: 2;
+    width: auto;
+    inset: auto;
+  }
+
+  .app-shell__workspace {
+    grid-column: 2;
+  }
+
+  .app-shell > .description-drawer {
+    grid-column: 3;
+  }
+
+  .app-shell--details-open:not(.app-shell--immersive) {
+    grid-template-columns:
+      var(--sidebar-width-compact)
+      minmax(0, 1fr)
+      min(var(--description-width), 38vw);
+  }
+}
+
+@media (width < 768px) {
+  .app-shell:not(.app-shell--immersive) {
+    grid-template-columns: minmax(0, 1fr) 0;
+  }
+
+  .app-shell__sidebar {
+    position: fixed;
+    z-index: calc(var(--queue-layer) - 2);
+    top: var(--height-of-header);
+    bottom: var(--queue-player-offset, 0);
+    left: 0;
+    width: 78vw;
+    overflow: visible;
+    border-right: none;
+    pointer-events: none;
+  }
+
+  .app-shell__workspace {
+    grid-column: 1;
+  }
+
+  .app-shell > .description-drawer {
+    grid-column: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-shell { transition: none; }
+}

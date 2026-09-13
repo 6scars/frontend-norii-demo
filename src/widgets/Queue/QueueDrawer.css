@@ -1,0 +1,98 @@
+.queue-drawer {
+  position: fixed;
+  z-index: var(--queue-layer);
+  inset: 0 0 var(--queue-player-offset, 0px) auto;
+  width: 0;
+  pointer-events: none;
+}
+
+.queue-drawer__trigger {
+  position: absolute;
+  top: calc(var(--height-of-header) + var(--space-3));
+  right: var(--space-3);
+  z-index: 1;
+  width: var(--queue-handle-width);
+  height: var(--queue-handle-width);
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-sm);
+  background: rgba(17, 17, 20, .94);
+  color: var(--color-text-subtle);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .28);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: right var(--queue-motion) var(--ease-out), background-color var(--motion-fast), color var(--motion-fast);
+}
+
+.queue-drawer__trigger:hover {
+  background: var(--color-surface-hover);
+  color: var(--color-accent-bright);
+}
+
+.queue-drawer__surface {
+  position: absolute;
+  top: calc(var(--height-of-header) + var(--space-3));
+  right: var(--space-3);
+  bottom: var(--space-3);
+  width: min(var(--queue-width), calc(100vw - var(--queue-handle-width) - var(--space-6)));
+  overflow: hidden;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-lg);
+  background: var(--color-canvas);
+  box-shadow: -16px 16px 48px rgba(0, 0, 0, .45);
+  transform: translateX(calc(100% + var(--space-4)));
+  visibility: hidden;
+  transition: transform var(--queue-motion) var(--ease-out), visibility 0s var(--queue-motion);
+}
+
+.queue-drawer--open .queue-drawer__surface {
+  pointer-events: auto;
+  transform: translateX(0);
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.queue-drawer--open .queue-drawer__trigger {
+  right: calc(min(var(--queue-width), calc(100vw - var(--queue-handle-width) - var(--space-6))) + var(--space-3) - 1px);
+  border-right: 0;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  box-shadow: -10px 12px 28px rgba(0, 0, 0, .32);
+}
+
+.queue-drawer--details-open .queue-drawer__trigger {
+  right: min(var(--description-width), 38vw);
+  border-right: 0;
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  box-shadow: -10px 12px 28px rgba(0, 0, 0, .32);
+}
+
+@media (width < 768px) {
+  .queue-drawer__surface {
+    top: var(--height-of-header);
+    right: 0;
+    bottom: 0;
+    width: calc(100vw - var(--queue-handle-width));
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .queue-drawer--open .queue-drawer__trigger {
+    right: calc(100vw - var(--queue-handle-width));
+  }
+
+  .queue-drawer--details-open .queue-drawer__trigger {
+    right: var(--space-3);
+    border-right: 1px solid var(--color-line-strong);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, .28);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .queue-drawer__surface,
+  .queue-drawer__trigger {
+    transition: none;
+  }
+}

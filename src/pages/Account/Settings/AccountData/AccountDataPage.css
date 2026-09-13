@@ -1,0 +1,25 @@
+.account-data-page { min-height: 100%; max-width: 860px; padding: var(--space-5) var(--space-7) var(--space-8); animation: page-enter var(--motion-slow) var(--ease-out) both; }
+.account-data-page > header > span { color: var(--color-accent-bright); font-size: .62rem; font-weight: 700; letter-spacing: .13em; }
+.account-data-page > header h1 { margin-top: var(--space-2); font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -.05em; }
+.account-data-page > header p { margin-top: var(--space-2); color: var(--color-text-muted); font-size: .78rem; }
+.account-data-card { margin-top: var(--space-6); padding: var(--space-5); border: 1px solid var(--color-line); border-radius: var(--radius-lg); background: rgba(17,17,20,.68); }
+.account-data-card__heading { display: flex; align-items: center; gap: var(--space-3); padding-bottom: var(--space-4); border-bottom: 1px solid var(--color-line); }
+.account-data-card__heading > .ui-icon { color: var(--color-accent-bright); }
+.account-data-card__heading h2 { font-size: .92rem; }
+.account-data-card__heading p { margin-top: var(--space-1); color: var(--color-text-muted); font-size: .66rem; }
+.account-data-form { display: grid; margin-top: var(--space-5); }
+.account-data-form label { color: var(--color-text-subtle); font-size: .72rem; font-weight: 700; }
+.account-data-form input { width: 100%; margin-top: var(--space-2); padding: var(--space-3) var(--space-4); border: 1px solid var(--color-line-strong); border-radius: var(--radius-sm); background: var(--color-canvas); color: var(--color-text); }
+.account-data-form input::placeholder { color: var(--color-text-muted); }
+.account-data-form input:hover { border-color: var(--color-text-muted); }
+.account-data-form > small { margin-top: var(--space-2); color: var(--color-text-muted); font-size: .64rem; }
+.account-data-form__actions { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin-top: var(--space-6); }
+.account-data-form__feedback { min-height: 1.1rem; margin-top: var(--space-4); color: var(--color-text-muted); font-size: .68rem; }
+.account-data-form__feedback--success { color: var(--color-text-subtle); }
+.account-data-form__feedback--error { color: var(--color-accent-bright); }
+.account-data-page--guest { min-height: 58vh; display: grid; place-content: center; justify-items: center; text-align: center; }
+.account-data-page--guest > .ui-icon { color: var(--color-accent-bright); }
+.account-data-page--guest h1 { margin: var(--space-4) 0 var(--space-5); font-size: 1.5rem; }
+@media (width < 768px) { .account-data-page { padding: var(--space-5); } }
+@media (width < 560px) { .account-data-page { padding: var(--space-4); } .account-data-form__actions { align-items: stretch; flex-direction: column-reverse; } .account-data-form__actions .button { justify-content: center; width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .account-data-page { animation: none; } }

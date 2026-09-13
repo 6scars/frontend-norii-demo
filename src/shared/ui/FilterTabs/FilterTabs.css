@@ -1,0 +1,22 @@
+.filter-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.filter-tab {
+  min-height: 36px;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  font: inherit;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: border-color var(--motion-fast), color var(--motion-fast), background-color var(--motion-fast);
+}
+
+.filter-tab:hover { border-color: var(--color-text-subtle); color: var(--color-text); }
+.filter-tab--active { border-color: rgba(223, 57, 61, 0.44); background: rgba(126, 31, 38, 0.38); color: var(--color-text); }
+.filter-tab:disabled { cursor: not-allowed; opacity: .46; }

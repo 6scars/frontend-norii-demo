@@ -1,0 +1,51 @@
+.discover-page { min-height: 100%; padding: var(--space-5) var(--space-7) var(--space-8); animation: page-enter var(--motion-slow) var(--ease-out) both; }
+.discover-heading { margin-bottom: var(--space-5); }
+.discover-heading h1 { font-size: clamp(1.9rem, 3vw, 2.7rem); letter-spacing: -.04em; }
+.discover-heading p { margin-top: var(--space-2); color: var(--color-text-muted); font-size: .88rem; }
+.discover-page > .filter-tabs { margin: var(--space-5) 0; }
+.discover-hero { position: relative; isolation: isolate; min-height: 260px; display: flex; align-items: center; overflow: hidden; border: 1px solid var(--color-line-strong); border-radius: var(--radius-lg); background: radial-gradient(circle at 75% 35%, rgba(216,59,67,.3), transparent 22%), #110d0f; }
+.discover-hero > img { position: absolute; z-index: -2; inset: 0 0 0 38%; width: 62%; height: 100%; object-fit: cover; opacity: .7; filter: saturate(.7) brightness(.65); }
+.discover-hero::after { content: ''; position: absolute; z-index: -1; inset: 0; background: linear-gradient(90deg, #100d0f 10%, rgba(16,13,15,.94) 42%, rgba(16,13,15,.2)); }
+.discover-hero > div { width: min(520px, 62%); padding: var(--space-7); }
+.discover-hero span { color: var(--color-accent-text); font-size: .67rem; font-weight: 700; letter-spacing: .1em; }
+.discover-hero h2 { max-width: 390px; margin-top: var(--space-3); font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1; letter-spacing: -.045em; }
+.discover-hero p { margin: var(--space-4) 0 var(--space-5); color: var(--color-text-subtle); }
+.discover-section { margin-top: var(--space-7); }
+.discover-section > h2 { margin-bottom: var(--space-4); font-size: 1.08rem; }
+.discover-cards { display: grid; grid-template-columns: repeat(4, minmax(120px, 1fr)); gap: var(--space-4); }
+.discover-card { min-width: 0; padding: 0; border: 0; background: transparent; color: var(--color-text); text-align: left; cursor: pointer; transition: transform var(--motion-medium); }
+.discover-card:hover { transform: translateY(-4px); }
+.discover-card__art { aspect-ratio: 1.65; display: grid; place-items: center; overflow: hidden; border: 1px solid var(--color-line-strong); border-radius: var(--radius-md); background: linear-gradient(145deg, #371418, #111115); color: var(--color-text-muted); font-size: 2rem; }
+.discover-card__art img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.72) brightness(.72); transition: transform var(--motion-slow); }
+.discover-card:hover img { transform: scale(1.04); }
+.discover-card strong, .discover-card small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.discover-card strong { margin-top: var(--space-3); font-size: .82rem; }
+.discover-card small { margin-top: 4px; color: var(--color-text-muted); font-size: .7rem; }
+.discover-artists { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); }
+.discover-artist { min-width: 0; display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--color-line); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text); text-align: left; transition: border-color var(--motion-fast), background-color var(--motion-fast); }
+.discover-artist:hover { border-color: var(--color-line-strong); background: var(--color-surface-raised); }
+.discover-artist > a { min-width: 0; display: flex; flex: 1; align-items: center; gap: var(--space-3); color: inherit; text-decoration: none; }
+.discover-artist__avatar { width: 44px; height: 44px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 50%; background: radial-gradient(circle at 30% 25%, #843138, #1c1114 70%); color: var(--color-text); font-weight: 700; }
+.discover-artist > a > span:nth-child(2) { min-width: 0; }
+.discover-artist strong, .discover-artist small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.discover-artist strong { font-size: .8rem; }
+.discover-artist small { margin-top: 4px; color: var(--color-text-muted); font-size: .66rem; }
+.discover-artist > button { margin-left: auto; color: var(--color-text-muted); }
+
+@media (width < 1024px) {
+  .discover-page { padding: var(--space-5); }
+  .discover-artists { grid-template-columns: 1fr 1fr; }
+}
+
+@media (width < 768px) {
+  .discover-page { padding: var(--space-4); }
+  .discover-hero { min-height: 310px; }
+  .discover-hero > img { inset: 0; width: 100%; opacity: .42; }
+  .discover-hero > div { width: 100%; padding: var(--space-6); }
+  .discover-cards { grid-template-columns: 1fr 1fr; gap: var(--space-4) var(--space-3); }
+  .discover-artists { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .discover-page, .discover-card, .discover-card__art img { animation: none; transition: none; }
+}
