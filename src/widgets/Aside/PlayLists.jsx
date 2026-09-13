@@ -1,4 +1,6 @@
-const playlistImageBaseUrl = 'https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/images/songPictures'
+import { SUPABASE_STORAGE_URL } from '../../config.js'
+
+const playlistImageBaseUrl = `${SUPABASE_STORAGE_URL}/images/songPictures`
 
 function getPlaylistImages(playlist) {
   const songIds = Array.isArray(playlist.song_ids) ? playlist.song_ids : []

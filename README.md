@@ -5,7 +5,7 @@ music discovery and playback, authentication, user playlists, recently played
 tracks, and an authenticated song upload flow.
 
 The corresponding API is maintained in the
-[`backend-spotify`](https://github.com/6scars/backend-spotify) repository.
+[`backend-spotify-demo`](https://github.com/6scars/backend-spotify-demo) repository.
 
 ## Features
 
@@ -49,7 +49,7 @@ interface, but podcast data and playback are not implemented.
 
 - A recent Node.js version compatible with Vite 7 (Node.js 22 is recommended)
 - npm
-- A running `backend-spotify` API for functionality that reads or changes data
+- A running `backend-spotify-demo` API for functionality that reads or changes data
 - Access to the configured public Supabase Storage bucket for artwork and audio
 
 ## Environment variables
@@ -58,21 +58,20 @@ Create `.env.development` for local development:
 
 ```env
 VITE_BACKEND_URL=http://localhost:3005
-VITE_SUPA_B_STOR=https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify
+VITE_SUPA_B_STOR=https://your-project-ref.supabase.co/storage/v1/object/public/spotify
 ```
 
 | Variable | Required | Description |
 | --- | --- | --- |
-| `VITE_BACKEND_URL` | No | Base URL of the Spotify API. The deployed Render API is used when omitted. |
-| `VITE_SUPA_B_STOR` | No | Base URL of the public Supabase Storage bucket. The deployed bucket URL is used when omitted. |
+| `VITE_BACKEND_URL` | Yes in deployment | Base URL of the demo Spotify API on Northflank. |
+| `VITE_SUPA_B_STOR` | Yes in deployment | Base URL of the isolated demo Supabase Storage bucket. |
 
 All variables prefixed with `VITE_` are exposed to browser code. Never put a
 database connection string, JWT signing secret, Supabase `sb_secret_...` key, or
 other server credential in this repository.
 
-> **Important:** without a local `VITE_BACKEND_URL`, development falls back to
-> `https://spotify-backend-1-olcd.onrender.com` and can operate on the deployed
-> environment instead of the local backend.
+Without `VITE_BACKEND_URL`, local development uses `http://localhost:3005`.
+Both variables must be configured in Vercel before a demo deployment is built.
 
 ## Local development
 
@@ -82,7 +81,7 @@ Install frontend dependencies:
 npm ci
 ```
 
-Start the backend in the `backend-spotify` repository:
+Start the backend in the `backend-spotify-demo` repository:
 
 ```bash
 npm run dev
@@ -96,7 +95,7 @@ npm run dev
 
 The configured local addresses are:
 
-- Frontend: `http://localhost:3001`
+- Frontend: `http://localhost:3201`
 - Backend: `http://localhost:3005`
 
 Vite automatically loads `.env.development` when `npm run dev` is used. Restart
@@ -166,8 +165,8 @@ The browser stores `jwt`, `user_id`, and `latest` keys in `localStorage`.
 `vercel.json` rewrites all application routes to `index.html`, allowing React
 Router paths such as `/addSong` to work after a direct navigation or page
 refresh. Configure `VITE_BACKEND_URL` and `VITE_SUPA_B_STOR` in the deployment
-environment before building if the default deployed services should not be
-used.
+environment before building. The demo code does not contain production service
+fallbacks.
 
 ## Track details panel
 

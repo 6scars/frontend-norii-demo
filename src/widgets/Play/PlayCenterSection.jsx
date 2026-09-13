@@ -1,10 +1,11 @@
 import { useState } from 'react'
 
+import { SUPABASE_STORAGE_URL } from '../../config.js'
 import { formatPlayerTime } from '../../modules/Player/player-display.js'
 import Icon from '../../shared/ui/Icon.jsx'
 import './PlayCenterSection.css'
 
-const songsStorageUrl = 'https://rgmmwhkixprkskznqjcy.supabase.co/storage/v1/object/public/spotify/songs'
+const songsStorageUrl = `${SUPABASE_STORAGE_URL}/songs`
 
 export default function PlayCenterSection({
   audioEvents,
