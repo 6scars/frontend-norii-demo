@@ -46,7 +46,7 @@ test('queue trigger stays available beside track details and swaps the right pan
   const shell = readSource('src/app/AppShell.css')
   const queue = readSource('src/widgets/Queue/QueueDrawer.jsx')
   const styles = readSource('src/widgets/Queue/QueueDrawer.css')
-  const uiState = readSource('src/modules/UIState/useUIState.jsx')
+  const uiState = readSource('src/modules/UIState/useUIState.ts')
 
   assert.doesNotMatch(shell, /app-shell--details-open\s*>\s*\.queue-drawer\s*\{[^}]*visibility:\s*hidden/s)
   assert.match(queue, /queue-drawer--details-open/)
