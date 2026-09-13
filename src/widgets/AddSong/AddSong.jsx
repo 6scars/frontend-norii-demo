@@ -5,11 +5,12 @@ import { APP_ROUTES } from '../../app/routes.js'
 import { readSession } from '../../modules/Auth/session-storage.js'
 import {
   PUBLISHING_POLICY_VERSION,
+  getDemoPublishingNotice,
   validateAudioFile,
   validateImageFile,
   validateSongUpload,
 } from '../../modules/Upload/song-upload.js'
-import { fetchAuthorAlbums, uploadSong } from '../../modules/Upload/upload-api.js'
+import { fetchAuthorAlbums, fetchDemoPublishingStatus, uploadSong } from '../../modules/Upload/upload-api.js'
 import Icon from '../../shared/ui/Icon.jsx'
 import UploadField from './UploadField.jsx'
 import UploadReview from './UploadReview.jsx'
@@ -40,6 +41,7 @@ function useObjectUrl(file) {
 export default function SongUpload() {
   const [activeStep, setActiveStep] = useState('details')
   const [albumsInfo, setAlbumsInfo] = useState([])
+  const [publishingStatus, setPublishingStatus] = useState(null)
   const [audioFile, setAudioFile] = useState(null)
   const [imageFile, setImageFile] = useState(null)
   const [errors, setErrors] = useState({})
@@ -59,16 +61,22 @@ export default function SongUpload() {
   useEffect(() => {
     const controller = new AbortController()
 
-    async function loadAlbums() {
+    async function loadPageData() {
       try {
-        const albums = await fetchAuthorAlbums(token, controller.signal)
-        if (!controller.signal.aborted) setAlbumsInfo(albums)
+        const [albums, status] = await Promise.all([
+          fetchAuthorAlbums(token, controller.signal),
+          fetchDemoPublishingStatus(token, controller.signal),
+        ])
+        if (!controller.signal.aborted) {
+          setAlbumsInfo(albums)
+          setPublishingStatus(status)
+        }
       } catch (error) {
         if (!controller.signal.aborted) setRequestState({ status: 'error', message: error.message })
       }
     }
 
-    if (hasToken) loadAlbums()
+    if (hasToken) loadPageData()
     return () => controller.abort()
   }, [hasToken, token])
 
@@ -101,6 +109,10 @@ export default function SongUpload() {
   }
 
   const sendSong = async () => {
+    if (publishingStatus?.canPublish === false) {
+      setRequestState({ status: 'error', message: publishingStatus.message })
+      return
+    }
     const validationErrors = validateSongUpload({
       ...form,
       audioFile,
@@ -130,13 +142,19 @@ export default function SongUpload() {
     try {
       const data = await uploadSong(formData, token)
       setRequestState({ status: 'success', message: data.message || 'Utwór został przesłany.' })
+      fetchDemoPublishingStatus(token)
+        .then(setPublishingStatus)
+        .catch(() => {})
     } catch (error) {
       setRequestState({ status: 'error', message: error.message || 'Nie udało się połączyć z serwerem.' })
+      fetchDemoPublishingStatus(token)
+        .then(setPublishingStatus)
+        .catch(() => {})
     }
   }
 
   if (!hasToken) {
-    return <main className="song-upload song-upload--guest"><Icon name="plus" size={38} /><h1>Zaloguj się, aby dodać utwór</h1><p>Przesyłanie muzyki jest dostępne dla uwierzytelnionych kont twórców.</p><Link className="button button--primary" to={APP_ROUTES.home}>Wróć do aplikacji</Link></main>
+    return <main className="song-upload song-upload--guest"><Icon name="plus" size={38} /><h1>Zaloguj się, aby dodać utwór</h1><p>Przesyłanie muzyki jest dostępne dla zalogowanych użytkowników.</p><Link className="button button--primary" to={APP_ROUTES.home}>Wróć do aplikacji</Link></main>
   }
 
   return (
@@ -145,13 +163,15 @@ export default function SongUpload() {
       <section className="song-upload__workspace">
         <header><span>DODAJ NOWY UTWÓR</span><h1>Opublikuj muzykę</h1><p>Przygotuj informacje, zgodne pliki i wymagane oświadczenia przed wysłaniem.</p></header>
 
+        {publishingStatus ? <div className={`song-upload__demo-notice${publishingStatus.canPublish ? '' : ' song-upload__demo-notice--blocked'}`} role={publishingStatus.canPublish ? 'note' : 'alert'}><strong>{getDemoPublishingNotice(publishingStatus)}</strong><p>{publishingStatus.message || `Wspólny limit plików dla wszystkich kont: ${Math.ceil(publishingStatus.storage.usedBytes / 1024 / 1024)} z ${Math.ceil(publishingStatus.storage.limitBytes / 1024 / 1024)} MiB.`}</p></div> : null}
+
         {activeStep === 'details' ? <div className="song-upload__panel upload-details"><label><span>Tytuł utworu *</span><input name="song_name" onChange={updateField} placeholder="Np. Cienie miasta" type="text" value={form.song_name} />{errors.song_name ? <em>{errors.song_name}</em> : null}</label><label><span>Opis / informacje o prawach</span><textarea name="credit" onChange={updateField} placeholder="Autorzy, producenci, prawa…" rows="4" value={form.credit} /></label><label><span>Połącz z albumem</span><select name="album_id" onChange={chooseAlbum} value={form.album_id}><option value="">Bez albumu</option>{albumsInfo.map((album) => <option key={album.id} value={album.id}>{album.album_name}</option>)}</select></label></div> : null}
 
         {activeStep === 'files' ? <div className="song-upload__panel upload-files"><div className="upload-files__requirements" role="note"><strong>Wymagania dotyczące plików</strong><p>Nagranie musi być plikiem MP3 do 25 MB. Okładka musi być plikiem JPG, JPEG lub PNG do 5 MB.</p></div><div className="upload-files__fields"><UploadField accept="image/jpeg,image/png,.jpg,.jpeg,.png" error={errors.imageFile} file={imageFile} hint="JPG, JPEG lub PNG · maks. 5 MB" id="song-cover" label="Dodaj okładkę" onFile={chooseImage} /><UploadField accept="audio/mpeg,.mp3" error={errors.audioFile} file={audioFile} hint="MP3 · maks. 25 MB" id="song-audio" label="Dodaj nagranie" onFile={chooseAudio} /></div></div> : null}
 
         {activeStep === 'review' ? <div className="song-upload__panel"><UploadReview audioUrl={audioUrl} consent={publicationConsent} errors={errors} form={form} imageUrl={imageUrl} onConsentChange={updatePublicationConsent} policyVersion={PUBLISHING_POLICY_VERSION} /></div> : null}
 
-        <footer className="song-upload__footer"><div>{requestState.message ? <p className={`song-upload__message song-upload__message--${requestState.status}`} role="status">{requestState.message}</p> : null}</div><div><button className="button button--quiet" onClick={() => setActiveStep(steps[Math.max(0, steps.findIndex((step) => step.id === activeStep) - 1)].id)} type="button">Wstecz</button>{activeStep !== 'review' ? <button className="button button--primary" onClick={() => setActiveStep(steps[Math.min(steps.length - 1, steps.findIndex((step) => step.id === activeStep) + 1)].id)} type="button">Dalej</button> : <button className="button button--primary" disabled={requestState.status === 'pending'} onClick={sendSong} type="button">{requestState.status === 'pending' ? 'Wysyłanie…' : 'Wyślij utwór'}</button>}</div></footer>
+        <footer className="song-upload__footer"><div>{requestState.message ? <p className={`song-upload__message song-upload__message--${requestState.status}`} role="status">{requestState.message}</p> : null}</div><div><button className="button button--quiet" onClick={() => setActiveStep(steps[Math.max(0, steps.findIndex((step) => step.id === activeStep) - 1)].id)} type="button">Wstecz</button>{activeStep !== 'review' ? <button className="button button--primary" onClick={() => setActiveStep(steps[Math.min(steps.length - 1, steps.findIndex((step) => step.id === activeStep) + 1)].id)} type="button">Dalej</button> : <button className="button button--primary" disabled={requestState.status === 'pending' || publishingStatus?.canPublish === false} onClick={sendSong} type="button">{requestState.status === 'pending' ? 'Wysyłanie…' : 'Wyślij utwór'}</button>}</div></footer>
       </section>
     </main>
   )

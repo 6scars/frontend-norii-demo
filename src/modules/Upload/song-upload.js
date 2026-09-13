@@ -51,3 +51,10 @@ export function validateSongUpload({
 
   return errors
 }
+
+export function getDemoPublishingNotice(status) {
+  const used = Number(status?.publications?.used ?? 0)
+  const limit = Number(status?.publications?.limit ?? 2)
+  const ttlMinutes = Number(status?.publicationTtlMinutes ?? 15)
+  return `Wersja demonstracyjna: wykorzystano ${used} z ${limit} publikacji. Utwory i pliki są automatycznie usuwane po ${ttlMinutes} minutach.`
+}

@@ -71,3 +71,9 @@
 .upload-files__fields { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); }
 
 @media (width < 560px) { .upload-files__fields { grid-template-columns: 1fr; } }
+
+.song-upload__demo-notice { width: min(920px, 100%); margin-top: var(--space-5); padding: var(--space-4); border: 1px solid rgba(145, 216, 174, .24); border-radius: var(--radius-md); background: rgba(45, 112, 72, .1); }
+.song-upload__demo-notice strong { display: block; color: var(--color-text); font-size: .72rem; line-height: 1.5; }
+.song-upload__demo-notice p { margin-top: var(--space-2); color: var(--color-text-muted); font-size: .66rem; line-height: 1.5; }
+.song-upload__demo-notice--blocked { border-color: rgba(239, 74, 78, .38); background: rgba(126, 31, 34, .14); }
+.song-upload__demo-notice--blocked p { color: #f1a2a4; }
