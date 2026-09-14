@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 
-import { getDemoPublishingNotice } from '../src/modules/Upload/song-upload.js'
-import { fetchDemoPublishingStatus } from '../src/modules/Upload/upload-api.js'
+import { getDemoPublishingNotice } from '../src/modules/Upload/song-upload.ts'
+import { fetchDemoPublishingStatus } from '../src/modules/Upload/upload-api.ts'
 
 test('loads demo publishing status with the authenticated request', async () => {
   const originalFetch = globalThis.fetch

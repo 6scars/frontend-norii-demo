@@ -4,19 +4,19 @@ import test from 'node:test'
 import { fileURLToPath } from 'node:url'
 
 const dataPageSource = readFileSync(
-  fileURLToPath(new URL('../src/pages/Account/Settings/AccountData/AccountDataPage.jsx', import.meta.url)),
+  fileURLToPath(new URL('../src/pages/Account/Settings/AccountData/AccountDataPage.tsx', import.meta.url)),
   'utf8',
 )
 const settingsPageSource = readFileSync(
-  fileURLToPath(new URL('../src/pages/Account/Settings/SettingsPage.jsx', import.meta.url)),
+  fileURLToPath(new URL('../src/pages/Account/Settings/SettingsPage.tsx', import.meta.url)),
   'utf8',
 )
 const accountPageSource = readFileSync(
-  fileURLToPath(new URL('../src/pages/Account/AccountPage.jsx', import.meta.url)),
+  fileURLToPath(new URL('../src/pages/Account/AccountPage.tsx', import.meta.url)),
   'utf8',
 )
 const accountMenuSource = readFileSync(
-  fileURLToPath(new URL('../src/widgets/Signing/AccountOptions/AccountOptions.jsx', import.meta.url)),
+  fileURLToPath(new URL('../src/widgets/Signing/AccountOptions/AccountOptions.tsx', import.meta.url)),
   'utf8',
 )
 

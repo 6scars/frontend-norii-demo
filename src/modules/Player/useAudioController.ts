@@ -14,13 +14,13 @@ interface AudioControllerOptions {
 
 export interface AudioController {
   audioEvents: {
-    onEnded(): void
-    onLoadedData(event: SyntheticEvent<HTMLAudioElement>): void
-    onLoadedMetadata(event: SyntheticEvent<HTMLAudioElement>): void
-    onPause(): void
-    onPlay(): void
-    onTimeUpdate(event: SyntheticEvent<HTMLAudioElement>): void
-    onVolumeChange(event: SyntheticEvent<HTMLAudioElement>): void
+    onEnded: () => void
+    onLoadedData: (event: SyntheticEvent<HTMLAudioElement>) => void
+    onLoadedMetadata: (event: SyntheticEvent<HTMLAudioElement>) => void
+    onPause: () => void
+    onPlay: () => void
+    onTimeUpdate: (event: SyntheticEvent<HTMLAudioElement>) => void
+    onVolumeChange: (event: SyntheticEvent<HTMLAudioElement>) => void
   }
   audioRef: RefObject<HTMLAudioElement | null>
   currentTime: number
@@ -28,11 +28,11 @@ export interface AudioController {
   isPlaying: boolean
   loop: boolean
   muted: boolean
-  setAudioVolume(value: unknown): void
-  setCurrentTime(value: NumericStateUpdate): void
-  toggleLoop(): void
-  toggleMute(): void
-  togglePlay(): void
+  setAudioVolume: (value: unknown) => void
+  setCurrentTime: (value: NumericStateUpdate) => void
+  toggleLoop: () => void
+  toggleMute: () => void
+  togglePlay: () => void
   volume: number
 }
 

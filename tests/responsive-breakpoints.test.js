@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url'
 
 const sourceRoot = fileURLToPath(new URL('../src/', import.meta.url))
 const allowedBreakpoints = new Set([560, 768, 1024, 1280])
-const sourceExtensions = new Set(['.css', '.js', '.jsx'])
+const sourceExtensions = new Set(['.css', '.ts', '.tsx'])
 
 function collectSourceFiles(directory) {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {

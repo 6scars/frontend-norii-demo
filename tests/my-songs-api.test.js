@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 
-import { deleteMySong, fetchMySongs } from '../src/modules/MySongs/my-songs-api.js'
+import { deleteMySong, fetchMySongs } from '../src/modules/MySongs/my-songs-api.ts'
 
 test('pobiera własne utwory z tokenem i kursorem', async () => {
   const originalFetch = globalThis.fetch

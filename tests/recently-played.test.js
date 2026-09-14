@@ -5,7 +5,7 @@ import {
   addRecentlyPlayed,
   readRecentlyPlayed,
   saveRecentlyPlayed,
-} from '../src/modules/RecentlyPlayed/recently-played.js'
+} from '../src/modules/RecentlyPlayed/recently-played.ts'
 
 function createStorage(initialValues = {}) {
   const values = new Map(Object.entries(initialValues))

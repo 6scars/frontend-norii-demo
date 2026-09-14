@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { buildNowPlayingModel } from '../src/modules/Player/now-playing-model.js'
+import { buildNowPlayingModel } from '../src/modules/Player/now-playing-model.ts'
 
 const songs = [
   { id: 1, song_name: 'Cienie', author: 'Kair' },

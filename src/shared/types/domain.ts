@@ -56,6 +56,7 @@ export interface PublicationConsent {
 
 export interface DemoPublishingStatus {
   isDemo: true
+  message?: string
   canPublish: boolean
   publicationTtlMinutes: number
   publications: {

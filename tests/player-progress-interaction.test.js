@@ -7,7 +7,7 @@ const playerProgressCss = readFileSync(
   'utf8',
 )
 const playerProgressComponent = readFileSync(
-  new URL('../src/widgets/Play/PlayCenterSection.jsx', import.meta.url),
+  new URL('../src/widgets/Play/PlayCenterSection.tsx', import.meta.url),
   'utf8',
 )
 

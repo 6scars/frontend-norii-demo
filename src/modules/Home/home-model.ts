@@ -2,7 +2,7 @@ import { getSongId } from '../Catalog/song.ts'
 import { RECENTLY_PLAYED_LIMIT } from '../RecentlyPlayed/recently-played.ts'
 import type { Song } from '../../shared/types/domain.ts'
 
-interface HomeMix {
+export interface HomeMix {
   title: string
   subtitle: string
   tracks: Song[]

@@ -25,7 +25,7 @@ export type SongUploadErrors = Partial<
     | 'imageFile'
     | 'publishingTermsAccepted'
     | 'song_name',
-    string
+    string | undefined
   >
 >
 

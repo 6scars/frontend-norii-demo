@@ -5,7 +5,7 @@ import {
   clampSheetHeight,
   resolveSheetSnap,
   SHEET_SNAP,
-} from '../src/widgets/Center/hooks/useDescriptionSheet.js'
+} from '../src/widgets/Center/hooks/useDescriptionSheet.ts'
 
 test('wysokość panelu pozostaje pomiędzy dwoma punktami zatrzymania', () => {
   assert.equal(clampSheetHeight(120, 300, 600), 300)

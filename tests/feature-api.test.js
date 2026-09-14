@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { authenticate, validateSession } from '../src/modules/Auth/auth-api.js'
-import { updateUsername } from '../src/modules/Account/account-api.js'
-import { fetchSong, fetchSongs, recordSongView } from '../src/modules/Catalog/catalog-api.js'
-import { createPlaylist, fetchPlaylistDetails, fetchUserPlaylists } from '../src/modules/Playlists/playlists-api.js'
-import { fetchAuthorAlbums } from '../src/modules/Upload/upload-api.js'
+import { authenticate, validateSession } from '../src/modules/Auth/auth-api.ts'
+import { updateUsername } from '../src/modules/Account/account-api.ts'
+import { fetchSong, fetchSongs, recordSongView } from '../src/modules/Catalog/catalog-api.ts'
+import { createPlaylist, fetchPlaylistDetails, fetchUserPlaylists } from '../src/modules/Playlists/playlists-api.ts'
+import { fetchAuthorAlbums } from '../src/modules/Upload/upload-api.ts'
 
 test('walidacja bez tokenu kończy się bez żądania sieciowego', async (context) => {
   const originalFetch = globalThis.fetch

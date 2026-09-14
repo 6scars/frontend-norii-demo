@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 
-import { uploadSong } from '../src/modules/Upload/upload-api.js'
+import { uploadSong } from '../src/modules/Upload/upload-api.ts'
 
 test('song upload sends JWT in the Authorization header', async () => {
   const originalFetch = globalThis.fetch

@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { buildPlaylistPageModel } from '../src/modules/Playlists/playlist-page-model.js'
+import { buildPlaylistPageModel } from '../src/modules/Playlists/playlist-page-model.ts'
 
 test('model szczegółów oddziela nazwę playlisty od grywalnych utworów', () => {
   const model = buildPlaylistPageModel([

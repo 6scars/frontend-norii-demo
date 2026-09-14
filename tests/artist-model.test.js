@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { buildArtistModel } from '../src/modules/Artists/artist-model.js'
+import { buildArtistModel } from '../src/modules/Artists/artist-model.ts'
 
 const songs = [
   { id: 1, song_name: 'Cienie', author: 'Kair', biograph: 'Nocne brzmienia.', follows: 120 },

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { getAdjacentTrack } from '../src/modules/Player/player-navigation.js'
+import { getAdjacentTrack } from '../src/modules/Player/player-navigation.ts'
 
 const playlist = [{ song_id: 11 }, { song_id: 22 }, { id: 33 }]
 

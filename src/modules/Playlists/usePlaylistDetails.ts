@@ -13,7 +13,7 @@ function getErrorMessage(error: unknown): string {
     : 'Nie udało się pobrać playlisty'
 }
 
-export function usePlaylistDetails(playlistId: EntityId) {
+export function usePlaylistDetails(playlistId: EntityId | undefined) {
   const [playlistData, setPlaylistData] = useState<Song[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -29,6 +29,14 @@ export function usePlaylistDetails(playlistId: EntityId) {
   )
 
   useEffect(() => {
+    if (playlistId == null || playlistId === '') {
+      setPlaylistData([])
+      setError('Nieprawidłowy identyfikator playlisty')
+      setIsLoading(false)
+      return undefined
+    }
+
+    const validPlaylistId = playlistId
     const controller = new AbortController()
 
     async function loadPlaylist(): Promise<void> {
@@ -37,7 +45,7 @@ export function usePlaylistDetails(playlistId: EntityId) {
       setPlaylistData([])
       try {
         const playlist = await fetchPlaylistDetails(
-          playlistId,
+          validPlaylistId,
           controller.signal,
         )
         if (!controller.signal.aborted) setPlaylistData(playlist)

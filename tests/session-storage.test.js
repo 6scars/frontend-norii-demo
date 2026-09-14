@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { clearSession, readSession, saveSession } from '../src/modules/Auth/session-storage.js'
+import { clearSession, readSession, saveSession } from '../src/modules/Auth/session-storage.ts'
 
 function createStorage(initialValues = {}) {
   const values = new Map(Object.entries(initialValues))

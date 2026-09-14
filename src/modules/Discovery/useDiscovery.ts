@@ -5,7 +5,7 @@ import type { Song } from '../../shared/types/domain.ts'
 import { buildDiscoveryModel } from './discovery-model.ts'
 import type { DiscoveryModel } from './discovery-model.ts'
 
-export type DiscoverySection = 'recommended' | 'artists'
+export type DiscoverySection = 'recommended' | 'tracks' | 'artists'
 
 export interface DiscoveryState {
   model: DiscoveryModel

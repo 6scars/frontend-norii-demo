@@ -1,5 +1,10 @@
 import type { Playlist, Song } from '../../shared/types/domain.ts'
 
+export interface ValidPlaylist extends Playlist {
+  playlist_id: Exclude<Playlist['playlist_id'], null | undefined>
+  playlist_name: string
+}
+
 export const normalizePlaylistText = (value: string | null | undefined): string =>
   String(value ?? '').trim().toLocaleLowerCase('pl')
 
@@ -14,7 +19,7 @@ export function getPlaylistSongCount(
 
 function isValidPlaylist(
   playlist: Playlist | null | undefined,
-): playlist is Playlist {
+): playlist is ValidPlaylist {
   return Boolean(
     playlist
     && playlist.playlist_id !== null
@@ -25,7 +30,7 @@ function isValidPlaylist(
 
 export function getValidPlaylists(
   playlistsValue: readonly (Playlist | null | undefined)[] | null | undefined,
-): Playlist[] {
+): ValidPlaylist[] {
   return playlistsValue ? playlistsValue.filter(isValidPlaylist)
     : []
 }

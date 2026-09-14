@@ -8,7 +8,7 @@ import {
   validateAudioFile,
   validateImageFile,
   validateSongUpload,
-} from '../src/modules/Upload/song-upload.js'
+} from '../src/modules/Upload/song-upload.ts'
 
 const imageFile = { name: 'cover.png', type: 'image/png', size: 1024 }
 const audioFile = { name: 'song.mp3', type: 'audio/mpeg', size: 1024 }

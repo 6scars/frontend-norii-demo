@@ -3,10 +3,11 @@ import {
   normalizePlaylistText,
 } from './playlist-collection.ts'
 import type { Playlist } from '../../shared/types/domain.ts'
+import type { ValidPlaylist } from './playlist-collection.ts'
 
 export interface PlaylistOverview {
-  featured: Playlist | null
-  items: Playlist[]
+  featured: ValidPlaylist | null
+  items: ValidPlaylist[]
   total: number
 }
 

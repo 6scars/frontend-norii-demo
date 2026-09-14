@@ -4,7 +4,7 @@ import test from 'node:test'
 import { fileURLToPath } from 'node:url'
 
 const homePageSource = readFileSync(
-  fileURLToPath(new URL('../src/pages/Home/HomePage.jsx', import.meta.url)),
+  fileURLToPath(new URL('../src/pages/Home/HomePage.tsx', import.meta.url)),
   'utf8',
 )
 

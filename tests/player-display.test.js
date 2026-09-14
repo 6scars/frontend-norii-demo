@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { formatPlayerTime, getPlayerProgress } from '../src/modules/Player/player-display.js'
+import { formatPlayerTime, getPlayerProgress } from '../src/modules/Player/player-display.ts'
 
 test('czas odtwarzacza jest odporny na brak i ujemne dane', () => {
   assert.equal(formatPlayerTime(Number.NaN), '0:00')

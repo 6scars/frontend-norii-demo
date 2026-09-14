@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { clampVolume } from '../src/modules/Player/player-audio.js'
+import { clampVolume } from '../src/modules/Player/player-audio.ts'
 
 test('głośność jest ograniczana do zakresu elementu audio', () => {
   assert.equal(clampVolume(-0.4), 0)

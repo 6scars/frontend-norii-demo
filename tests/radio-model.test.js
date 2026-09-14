@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { buildRadioModel } from '../src/modules/Radio/radio-model.js'
+import { buildRadioModel } from '../src/modules/Radio/radio-model.ts'
 
 const songs = [
   { id: 1, song_name: 'Cienie', author: 'Kair', views: 90 },

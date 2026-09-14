@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 
-import { BACKEND_URL } from '../src/config.js'
-import { ApiError, requestJson } from '../src/shared/api/request.js'
+import { BACKEND_URL } from '../src/config.ts'
+import { ApiError, requestJson } from '../src/shared/api/request.ts'
 
 test('requestJson koduje body JSON i zwraca zdekodowaną odpowiedź', async (context) => {
   const originalFetch = globalThis.fetch

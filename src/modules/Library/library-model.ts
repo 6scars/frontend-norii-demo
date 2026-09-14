@@ -3,6 +3,7 @@ import {
   normalizePlaylistText,
 } from '../Playlists/playlist-collection.ts'
 import type { Playlist } from '../../shared/types/domain.ts'
+import type { ValidPlaylist } from '../Playlists/playlist-collection.ts'
 
 export type LibrarySort = 'recent' | 'name'
 
@@ -12,7 +13,7 @@ interface LibraryOptions {
 }
 
 export interface LibraryModel {
-  items: Playlist[]
+  items: ValidPlaylist[]
   total: number
 }
 

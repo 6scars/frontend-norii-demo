@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { buildPlaylistOverview } from '../src/modules/Playlists/playlist-overview.js'
+import { buildPlaylistOverview } from '../src/modules/Playlists/playlist-overview.ts'
 
 const playlists = [
   { playlist_id: 4, playlist_name: 'Nocne miasto', song_ids: [1, 2] },

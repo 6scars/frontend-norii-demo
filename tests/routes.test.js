@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { APP_ROUTES, getArtistRoute, getPlaylistRoute } from '../src/app/routes.js'
+import { APP_ROUTES, getArtistRoute, getPlaylistRoute } from '../src/app/routes.ts'
 
 test('podstawowe trasy zachowują Home i istniejący formularz dodawania utworu', () => {
   assert.deepEqual(APP_ROUTES, {

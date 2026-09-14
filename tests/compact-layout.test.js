@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { isCompactLayout } from '../src/shared/hooks/useCompactLayout.js'
+import { isCompactLayout } from '../src/shared/hooks/useCompactLayout.ts'
 
 test('układ kompaktowy nie wymaga obiektu window podczas renderowania serwerowego', () => {
   assert.equal(isCompactLayout(), false)

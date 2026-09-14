@@ -10,8 +10,8 @@ const readSource = (relativePath) => readFileSync(
 
 test('header spans the viewport while side panels stay outside the central layout flow', () => {
   const shell = readSource('src/app/AppShell.css')
-  const header = readSource('src/widgets/Header/Header.jsx')
-  const aside = readSource('src/widgets/Aside/Aside.jsx')
+  const header = readSource('src/widgets/Header/Header.tsx')
+  const aside = readSource('src/widgets/Aside/Aside.tsx')
 
   assert.match(shell, /\.app-shell__header\s*\{[^}]*grid-column:\s*1\s*\/\s*-1/s)
   assert.doesNotMatch(shell, /padding-right:\s*calc\(var\(--queue-handle-width\)/)
@@ -21,7 +21,7 @@ test('header spans the viewport while side panels stay outside the central layou
 })
 
 test('small-screen aside is a toggleable overlay sized independently from the workspace', () => {
-  const aside = readSource('src/widgets/Aside/Aside.jsx')
+  const aside = readSource('src/widgets/Aside/Aside.tsx')
   const styles = readSource('src/widgets/Aside/Aside.css')
 
   assert.match(aside, /aria-controls="app-navigation"/)
@@ -31,7 +31,7 @@ test('small-screen aside is a toggleable overlay sized independently from the wo
 })
 
 test('queue uses one compact edge trigger and overlays nearly the full small viewport', () => {
-  const queue = readSource('src/widgets/Queue/QueueDrawer.jsx')
+  const queue = readSource('src/widgets/Queue/QueueDrawer.tsx')
   const styles = readSource('src/widgets/Queue/QueueDrawer.css')
   const queueIcons = queue.match(/<Icon name="queue"/g) ?? []
 
@@ -44,7 +44,7 @@ test('queue uses one compact edge trigger and overlays nearly the full small vie
 
 test('queue trigger stays available beside track details and swaps the right panel', () => {
   const shell = readSource('src/app/AppShell.css')
-  const queue = readSource('src/widgets/Queue/QueueDrawer.jsx')
+  const queue = readSource('src/widgets/Queue/QueueDrawer.tsx')
   const styles = readSource('src/widgets/Queue/QueueDrawer.css')
   const uiState = readSource('src/modules/UIState/useUIState.ts')
 

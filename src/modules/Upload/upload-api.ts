@@ -11,6 +11,7 @@ interface AlbumsResponse {
 
 interface RawDemoPublishingStatus {
   isDemo?: unknown
+  message?: unknown
   canPublish?: unknown
   publicationTtlMinutes?: unknown
   publications?: {
@@ -54,7 +55,10 @@ export async function fetchDemoPublishingStatus(
     throw new Error('Serwer zwrócił nieprawidłowy status publikowania.')
   }
 
-  return status as DemoPublishingStatus
+  return {
+    ...status,
+    ...(typeof status.message === 'string' ? { message: status.message } : {}),
+  } as DemoPublishingStatus
 }
 
 export function uploadSong(

@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { buildPlaybackQueue, formatQueueCount } from '../src/modules/Player/playback-queue.js'
+import { buildPlaybackQueue, formatQueueCount } from '../src/modules/Player/playback-queue.ts'
 
 test('wyczyszczona kolejka pozostaje pusta, katalog trafia wyłącznie do propozycji', () => {
   const songs = [{ id: 1 }, { song_id: 2 }]
