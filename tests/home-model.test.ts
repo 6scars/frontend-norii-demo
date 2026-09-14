@@ -10,16 +10,16 @@ const songs = Array.from({ length: 9 }, (_, index) => ({
   author: `Twórca ${index + 1}`,
 }))
 
-test('buildHomeModel wybiera realny utwór i zachowuje wejściową tablicę', () => {
+await test('buildHomeModel wybiera realny utwór i zachowuje wejściową tablicę', () => {
   const original = [...songs]
   const model = buildHomeModel(songs, [])
 
-  assert.equal(model.featured.song_id, 1)
+  assert.equal(model.featured!.song_id, 1)
   assert.deepEqual(songs, original)
   assert.equal(model.selected.length, 5)
 })
 
-test('buildHomeModel wykorzystuje ostatnio słuchane bez duplikatów', () => {
+await test('buildHomeModel wykorzystuje ostatnio słuchane bez duplikatów', () => {
   const latest = [songs[2], songs[0], songs[2]]
   const model = buildHomeModel(songs, latest)
 
@@ -28,19 +28,19 @@ test('buildHomeModel wykorzystuje ostatnio słuchane bez duplikatów', () => {
   assert.ok(model.mixes.every((mix) => mix.tracks.length > 0))
 })
 
-test('buildHomeModel pokazuje najwyżej pięć ostatnio słuchanych utworów', () => {
+await test('buildHomeModel pokazuje najwyżej pięć ostatnio słuchanych utworów', () => {
   const model = buildHomeModel(songs, songs.slice(0, 7))
 
   assert.deepEqual(model.recent.map(getSongId), [1, 2, 3, 4, 5])
 })
 
-test('getSongId obsługuje oba identyfikatory używane w aktualnym projekcie', () => {
+await test('getSongId obsługuje oba identyfikatory używane w aktualnym projekcie', () => {
   assert.equal(getSongId({ song_id: 7 }), 7)
   assert.equal(getSongId({ id: 8 }), 8)
   assert.equal(getSongId(null), null)
 })
 
-test('buildHomeModel zwraca bezpieczny pusty model bez danych', () => {
+await test('buildHomeModel zwraca bezpieczny pusty model bez danych', () => {
   assert.deepEqual(buildHomeModel(null, null), {
     featured: null,
     selected: [],

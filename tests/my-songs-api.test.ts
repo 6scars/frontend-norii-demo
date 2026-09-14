@@ -1,19 +1,20 @@
+import { requestUrl } from './fetch-test-helpers.ts'
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 
 import { deleteMySong, fetchMySongs } from '../src/modules/MySongs/my-songs-api.ts'
 
-test('pobiera własne utwory z tokenem i kursorem', async () => {
+await test('pobiera własne utwory z tokenem i kursorem', async () => {
   const originalFetch = globalThis.fetch
-  let request
-  let url
-  globalThis.fetch = async (nextUrl, options) => {
-    url = nextUrl
-    request = options
-    return new Response(JSON.stringify({ data: [{ id: '9', songName: 'Cienie' }], nextCursor: '9' }), {
+  let request: RequestInit = {}
+  let url = ''
+  globalThis.fetch = (nextUrl, options) => {
+    url = requestUrl(nextUrl)
+    request = options ?? {}
+    return Promise.resolve(new Response(JSON.stringify({ data: [{ id: '9', songName: 'Cienie' }], nextCursor: '9' }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
-    })
+    }))
   }
 
   try {
@@ -29,17 +30,17 @@ test('pobiera własne utwory z tokenem i kursorem', async () => {
   }
 })
 
-test('usuwa wybrany własny utwór przez DELETE z tokenem', async () => {
+await test('usuwa wybrany własny utwór przez DELETE z tokenem', async () => {
   const originalFetch = globalThis.fetch
-  let request
-  let url
-  globalThis.fetch = async (nextUrl, options) => {
-    url = nextUrl
-    request = options
-    return new Response(JSON.stringify({ message: 'Utwór został usunięty.' }), {
+  let request: RequestInit = {}
+  let url = ''
+  globalThis.fetch = (nextUrl, options) => {
+    url = requestUrl(nextUrl)
+    request = options ?? {}
+    return Promise.resolve(new Response(JSON.stringify({ message: 'Utwór został usunięty.' }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
-    })
+    }))
   }
 
   try {
@@ -52,12 +53,12 @@ test('usuwa wybrany własny utwór przez DELETE z tokenem', async () => {
   }
 })
 
-test('odrzuca nieprawidłową odpowiedź listy', async () => {
+await test('odrzuca nieprawidłową odpowiedź listy', async () => {
   const originalFetch = globalThis.fetch
-  globalThis.fetch = async () => new Response(JSON.stringify({ data: 'bad' }), {
+  globalThis.fetch = () => Promise.resolve(new Response(JSON.stringify({ data: 'bad' }), {
     status: 200,
     headers: { 'Content-Type': 'application/json' },
-  })
+  }))
 
   try {
     await assert.rejects(fetchMySongs('signed-token'), /nieprawidłową listę/)

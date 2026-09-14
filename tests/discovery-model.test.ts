@@ -9,7 +9,7 @@ const songs = [
   { song_id: 3, song_name: 'Powrót', author: 'zorza', album_name: 'Droga' },
 ]
 
-test('wyszukiwanie odkrywania uwzględnia tytuł, autora i album bez zmiany wejścia', () => {
+await test('wyszukiwanie odkrywania uwzględnia tytuł, autora i album bez zmiany wejścia', () => {
   const input = [...songs]
 
   assert.deepEqual(buildDiscoveryModel(input, 'Kair').tracks.map((song) => song.id), [2])
@@ -17,14 +17,14 @@ test('wyszukiwanie odkrywania uwzględnia tytuł, autora i album bez zmiany wej�
   assert.deepEqual(input, songs)
 })
 
-test('model odkrywania zwraca unikalnych wykonawców z pierwszym powiązanym utworem', () => {
+await test('model odkrywania zwraca unikalnych wykonawców z pierwszym powiązanym utworem', () => {
   const model = buildDiscoveryModel(songs, '')
 
   assert.deepEqual(model.artists.map((artist) => artist.name), ['Zorza', 'Kair'])
-  assert.equal(model.artists[0].song.song_name, 'Światła miasta')
+  assert.equal(model.artists[0]!.song.song_name, 'Światła miasta')
 })
 
-test('model odkrywania odrzuca niepełne rekordy i bezpiecznie obsługuje brak danych', () => {
+await test('model odkrywania odrzuca niepełne rekordy i bezpiecznie obsługuje brak danych', () => {
   assert.deepEqual(buildDiscoveryModel(null, ''), { featured: null, tracks: [], artists: [] })
   assert.deepEqual(buildDiscoveryModel([{ id: 4 }, null], '').tracks, [])
 })

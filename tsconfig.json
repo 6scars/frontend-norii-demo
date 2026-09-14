@@ -7,8 +7,6 @@
       "DOM",
       "DOM.Iterable"
     ],
-    "allowJs": true,
-    "checkJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

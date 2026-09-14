@@ -3,12 +3,12 @@ import { readFileSync } from 'node:fs'
 import test from 'node:test'
 import { fileURLToPath } from 'node:url'
 
-const readSource = (relativePath) => readFileSync(
+const readSource = (relativePath: string) => readFileSync(
   fileURLToPath(new URL(`../${relativePath}`, import.meta.url)),
   'utf8',
 )
 
-test('header spans the viewport while side panels stay outside the central layout flow', () => {
+await test('header spans the viewport while side panels stay outside the central layout flow', () => {
   const shell = readSource('src/app/AppShell.css')
   const header = readSource('src/widgets/Header/Header.tsx')
   const aside = readSource('src/widgets/Aside/Aside.tsx')
@@ -20,7 +20,7 @@ test('header spans the viewport while side panels stay outside the central layou
   assert.doesNotMatch(aside, /className="brand-mark"/)
 })
 
-test('small-screen aside is a toggleable overlay sized independently from the workspace', () => {
+await test('small-screen aside is a toggleable overlay sized independently from the workspace', () => {
   const aside = readSource('src/widgets/Aside/Aside.tsx')
   const styles = readSource('src/widgets/Aside/Aside.css')
 
@@ -30,7 +30,7 @@ test('small-screen aside is a toggleable overlay sized independently from the wo
   assert.match(styles, /\.aside-drawer--open\s+\.aside-drawer__surface\s*\{[^}]*transform:\s*translateX\(0\)/s)
 })
 
-test('queue uses one compact edge trigger and overlays nearly the full small viewport', () => {
+await test('queue uses one compact edge trigger and overlays nearly the full small viewport', () => {
   const queue = readSource('src/widgets/Queue/QueueDrawer.tsx')
   const styles = readSource('src/widgets/Queue/QueueDrawer.css')
   const queueIcons = queue.match(/<Icon name="queue"/g) ?? []
@@ -42,7 +42,7 @@ test('queue uses one compact edge trigger and overlays nearly the full small vie
   assert.match(styles, /@media \(width < 768px\)[\s\S]*\.queue-drawer__surface\s*\{[^}]*width:\s*calc\(100vw - var\(--queue-handle-width\)\)/s)
 })
 
-test('queue trigger stays available beside track details and swaps the right panel', () => {
+await test('queue trigger stays available beside track details and swaps the right panel', () => {
   const shell = readSource('src/app/AppShell.css')
   const queue = readSource('src/widgets/Queue/QueueDrawer.tsx')
   const styles = readSource('src/widgets/Queue/QueueDrawer.css')

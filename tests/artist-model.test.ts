@@ -9,7 +9,7 @@ const songs = [
   { id: 3, song_name: 'Mgła', author: 'Lena' },
 ]
 
-test('profil twórcy wybiera wyłącznie utwory wskazanego autora', () => {
+await test('profil twórcy wybiera wyłącznie utwory wskazanego autora', () => {
   const model = buildArtistModel(songs, 'kair')
 
   assert.equal(model.name, 'Kair')
@@ -18,7 +18,7 @@ test('profil twórcy wybiera wyłącznie utwory wskazanego autora', () => {
   assert.deepEqual(model.tracks.map((song) => song.id), [1, 2])
 })
 
-test('profil twórcy zwraca jawny pusty model dla nieznanej nazwy', () => {
+await test('profil twórcy zwraca jawny pusty model dla nieznanej nazwy', () => {
   assert.deepEqual(buildArtistModel(songs, 'Nie istnieje'), {
     biography: '',
     followers: null,

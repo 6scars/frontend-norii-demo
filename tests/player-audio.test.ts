@@ -3,7 +3,7 @@ import test from 'node:test'
 
 import { clampVolume } from '../src/modules/Player/player-audio.ts'
 
-test('głośność jest ograniczana do zakresu elementu audio', () => {
+await test('głośność jest ograniczana do zakresu elementu audio', () => {
   assert.equal(clampVolume(-0.4), 0)
   assert.equal(clampVolume(0.35), 0.35)
   assert.equal(clampVolume(1.8), 1)

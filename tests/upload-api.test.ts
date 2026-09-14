@@ -3,16 +3,16 @@ import { test } from 'node:test'
 
 import { uploadSong } from '../src/modules/Upload/upload-api.ts'
 
-test('song upload sends JWT in the Authorization header', async () => {
+await test('song upload sends JWT in the Authorization header', async () => {
   const originalFetch = globalThis.fetch
-  let request
+  let request: RequestInit = {}
 
-  globalThis.fetch = async (_url, options) => {
-    request = options
-    return new Response(JSON.stringify({ message: 'ok' }), {
+  globalThis.fetch = (_url, options) => {
+    request = options ?? {}
+    return Promise.resolve(new Response(JSON.stringify({ message: 'ok' }), {
       status: 201,
       headers: { 'Content-Type': 'application/json' },
-    })
+    }))
   }
 
   try {

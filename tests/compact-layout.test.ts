@@ -2,19 +2,19 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { isCompactLayout } from '../src/shared/hooks/useCompactLayout.ts'
 
-test('układ kompaktowy nie wymaga obiektu window podczas renderowania serwerowego', () => {
+await test('układ kompaktowy nie wymaga obiektu window podczas renderowania serwerowego', () => {
   assert.equal(isCompactLayout(), false)
 })
 
-test('układ kompaktowy odczytuje bieżący breakpoint zamiast zapamiętywać pierwszy rozmiar', (context) => {
+await test('układ kompaktowy odczytuje bieżący breakpoint zamiast zapamiętywać pierwszy rozmiar', (context) => {
   const previous = Object.getOwnPropertyDescriptor(globalThis, 'window')
   context.after(() => {
     if (previous) Object.defineProperty(globalThis, 'window', previous)
-    else delete globalThis.window
+    else Reflect.deleteProperty(globalThis, 'window')
   })
   let matches = true
   Object.defineProperty(globalThis, 'window', { configurable: true, value: {
-    matchMedia: (query) => {
+    matchMedia: (query: string) => {
       assert.equal(query, '(width < 768px)')
       return { matches }
     },

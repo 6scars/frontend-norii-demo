@@ -11,7 +11,7 @@ const playerProgressComponent = readFileSync(
   'utf8',
 )
 
-test('kropka jest widoczna tylko podczas przytrzymania progress bara', () => {
+await test('kropka jest widoczna tylko podczas przytrzymania progress bara', () => {
   assert.match(
     playerProgressCss,
     /\.player-progress__input--engaged::-webkit-slider-thumb[\s\S]*?opacity:\s*1/,
@@ -26,7 +26,7 @@ test('kropka jest widoczna tylko podczas przytrzymania progress bara', () => {
   assert.doesNotMatch(playerProgressCss, /\.player-progress__input:hover/)
 })
 
-test('aktywny progress bar powiększa pasek i kropkę', () => {
+await test('aktywny progress bar powiększa pasek i kropkę', () => {
   assert.match(
     playerProgressCss,
     /\.player-progress__input--engaged::-webkit-slider-runnable-track[\s\S]*?height:\s*8px/,

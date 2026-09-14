@@ -8,7 +8,7 @@ const sourceRoot = fileURLToPath(new URL('../src/', import.meta.url))
 const allowedBreakpoints = new Set([560, 768, 1024, 1280])
 const sourceExtensions = new Set(['.css', '.ts', '.tsx'])
 
-function collectSourceFiles(directory) {
+function collectSourceFiles(directory: string): string[] {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
     const path = join(directory, entry.name)
     if (entry.isDirectory()) return collectSourceFiles(path)
@@ -16,8 +16,8 @@ function collectSourceFiles(directory) {
   })
 }
 
-test('responsywny interfejs korzysta wyłącznie z czterech wspólnych breakpointów', () => {
-  const invalidDeclarations = []
+await test('responsywny interfejs korzysta wyłącznie z czterech wspólnych breakpointów', () => {
+  const invalidDeclarations: string[] = []
 
   for (const file of collectSourceFiles(sourceRoot)) {
     const source = readFileSync(file, 'utf8')

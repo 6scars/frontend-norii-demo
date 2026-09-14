@@ -1,12 +1,13 @@
+import { requestUrl } from './fetch-test-helpers.ts'
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 
 import { getDemoPublishingNotice } from '../src/modules/Upload/song-upload.ts'
 import { fetchDemoPublishingStatus } from '../src/modules/Upload/upload-api.ts'
 
-test('loads demo publishing status with the authenticated request', async () => {
+await test('loads demo publishing status with the authenticated request', async () => {
   const originalFetch = globalThis.fetch
-  let request
+  let request: { url: string; options: RequestInit } = { url: '', options: {} }
 
   const status = {
     isDemo: true,
@@ -15,12 +16,12 @@ test('loads demo publishing status with the authenticated request', async () => 
     publications: { used: 0, limit: 2 },
     storage: { usedBytes: 100, limitBytes: 500 },
   }
-  globalThis.fetch = async (url, options) => {
-    request = { url, options }
-    return new Response(JSON.stringify(status), {
+  globalThis.fetch = (url, options) => {
+    request = { url: requestUrl(url), options: options ?? {} }
+    return Promise.resolve(new Response(JSON.stringify(status), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
-    })
+    }))
   }
 
   try {
@@ -32,18 +33,18 @@ test('loads demo publishing status with the authenticated request', async () => 
   }
 })
 
-test('builds a clear demo notice from the backend policy status', () => {
+await test('builds a clear demo notice from the backend policy status', () => {
   assert.equal(getDemoPublishingNotice({
     publicationTtlMinutes: 15,
     publications: { used: 1, limit: 2 },
   }), 'Wersja demonstracyjna: wykorzystano 1 z 2 publikacji. Utwory i pliki są automatycznie usuwane po 15 minutach.')
 })
-test('rejects malformed demo publishing status before the UI uses it', async () => {
+await test('rejects malformed demo publishing status before the UI uses it', async () => {
   const originalFetch = globalThis.fetch
-  globalThis.fetch = async () => new Response(JSON.stringify({ canPublish: true }), {
+  globalThis.fetch = () => Promise.resolve(new Response(JSON.stringify({ canPublish: true }), {
     status: 200,
     headers: { 'Content-Type': 'application/json' },
-  })
+  }))
 
   try {
     await assert.rejects(

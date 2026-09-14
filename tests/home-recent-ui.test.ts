@@ -8,7 +8,7 @@ const homePageSource = readFileSync(
   'utf8',
 )
 
-test('Home pokazuje rząd Ostatnie przed rzędem Wybrane dla Ciebie', () => {
+await test('Home pokazuje rząd Ostatnie przed rzędem Wybrane dla Ciebie', () => {
   const recentShelfPosition = homePageSource.indexOf('songs={model.recent}')
   const selectedShelfPosition = homePageSource.indexOf('songs={model.selected}')
 

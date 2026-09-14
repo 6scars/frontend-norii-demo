@@ -10,9 +10,11 @@ export const MAX_AUDIO_BYTES = 25 * 1024 * 1024
 export const MAX_IMAGE_BYTES = 5 * 1024 * 1024
 export const PUBLISHING_POLICY_VERSION = '2026-09-12-v1'
 
+export type UploadFileInfo = Pick<File, 'name' | 'type' | 'size'>
+
 export interface SongUploadInput {
-  audioFile: File | null
-  imageFile: File | null
+  audioFile: UploadFileInfo | null
+  imageFile: UploadFileInfo | null
   publicationConsent?: Partial<PublicationConsent>
   song_name: string
 }
@@ -37,7 +39,7 @@ function hasExtension(
   return extensions.some((extension) => normalizedName.endsWith(extension))
 }
 
-export function validateImageFile(file: File | null): string | undefined {
+export function validateImageFile(file: UploadFileInfo | null): string | undefined {
   if (!file) return 'Dodaj okładkę w formacie JPG lub PNG.'
   if (!imageTypes.has(file.type) || !hasExtension(file.name, imageExtensions)) {
     return 'Okładka musi być plikiem JPG lub PNG.'
@@ -48,7 +50,7 @@ export function validateImageFile(file: File | null): string | undefined {
   return undefined
 }
 
-export function validateAudioFile(file: File | null): string | undefined {
+export function validateAudioFile(file: UploadFileInfo | null): string | undefined {
   if (!file) return 'Dodaj nagranie w formacie MP3.'
   if (file.type !== 'audio/mpeg' || !hasExtension(file.name, ['.mp3'])) {
     return 'Nagranie musi być plikiem MP3.'
@@ -87,7 +89,7 @@ export function validateSongUpload({
   return errors
 }
 
-export function getDemoPublishingNotice(status: DemoPublishingStatus): string {
+export function getDemoPublishingNotice(status: Pick<DemoPublishingStatus, 'publicationTtlMinutes' | 'publications'>): string {
   const used = Number(status.publications.used)
   const limit = Number(status.publications.limit)
   const ttlMinutes = Number(status.publicationTtlMinutes)

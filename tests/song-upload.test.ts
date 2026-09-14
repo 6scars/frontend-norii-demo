@@ -19,7 +19,7 @@ const publicationConsent = {
   policyVersion: PUBLISHING_POLICY_VERSION,
 }
 
-test('formularz utworu akceptuje kompletny zestaw JPG/PNG i MP3', () => {
+await test('formularz utworu akceptuje kompletny zestaw JPG/PNG i MP3', () => {
   assert.deepEqual(validateSongUpload({ song_name: 'Cienie', imageFile, audioFile, publicationConsent }), {})
   assert.deepEqual(validateSongUpload({
     song_name: 'Cienie',
@@ -29,7 +29,7 @@ test('formularz utworu akceptuje kompletny zestaw JPG/PNG i MP3', () => {
   }), {})
 })
 
-test('formularz utworu zwraca błędy braków i nieprawidłowych formatów', () => {
+await test('formularz utworu zwraca błędy braków i nieprawidłowych formatów', () => {
   assert.deepEqual(validateSongUpload({
     song_name: 'abc',
     imageFile: { name: 'cover.webp', type: 'image/webp', size: 1024 },
@@ -45,7 +45,7 @@ test('formularz utworu zwraca błędy braków i nieprawidłowych formatów', () 
   })
 })
 
-test('formularz podaje osobne komunikaty dla przekroczonych limitów', () => {
+await test('formularz podaje osobne komunikaty dla przekroczonych limitów', () => {
   assert.equal(
     validateAudioFile({ ...audioFile, size: MAX_AUDIO_BYTES + 1 }),
     'Nagranie jest za duże. Maksymalny rozmiar to 25 MB.'
