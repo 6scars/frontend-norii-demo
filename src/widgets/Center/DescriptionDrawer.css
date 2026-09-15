@@ -103,7 +103,7 @@
     z-index: var(--description-layer);
     width: auto;
     height: var(--description-sheet-drag-height, var(--description-sheet-collapsed-height));
-    max-height: calc(100dvh - var(--player-height) - (var(--description-sheet-gap) * 2));
+    max-height: calc(100dvh  - var(--player-height) - (var(--description-sheet-gap) * 2));
     border: 1px solid var(--color-line-strong);
     border-radius: var(--description-sheet-radius);
     background: rgba(13, 13, 16, .985);
@@ -116,7 +116,7 @@
   }
 
   .description-drawer[data-sheet-snap="expanded"] {
-    height: var(--description-sheet-expanded-height);
+    height: var(--description-sheet-drag-height, var(--description-sheet-expanded-height));
   }
 
   .description-drawer[data-dragging="true"] {

@@ -3,7 +3,7 @@
 
 /*-----------------------HEADER-----------------------*/
 Header {
-  height: var(--height-of-header);
+  /* height: var(--height-of-header); */
   right: var(--padding-left-of-outer-borderline);
 }
 
