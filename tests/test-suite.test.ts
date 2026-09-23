@@ -1,3 +1,5 @@
+export {}
+
 await import('./app/routes.test.ts')
 await import('./infrastructure/http/request.test.ts')
 await import('./layout/compact-layout.test.ts')
